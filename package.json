@@ -1,0 +1,22 @@
+{
+  "name": "cypress",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "cypress:open": "cypress open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Michael0967/cypress.git"
+  },
+  "author": "Michael Rojas",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Michael0967/cypress/issues"
+  },
+  "homepage": "https://github.com/Michael0967/cypress#readme",
+  "devDependencies": {
+    "cypress": "^13.6.1"
+  }
+}
