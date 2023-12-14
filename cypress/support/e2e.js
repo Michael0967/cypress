@@ -16,6 +16,14 @@
 // Import commands.js using ES2015 syntax:
 import './commands'
 import './commands/uncaught-exception'
+import './commands/utils/only-open-sidecart'
+import './commands/utils/open-close-sidecart'
+import './commands/utils/swiper-button-next-upsell-sidecart'
+import './commands/utils/swiper-button-prev-upsell-sidecart'
+import './commands/utils/add-product-page'
+import './commands/utils/add-product-collection'
+import './commands/utils/add-product-upsell-sidecart'
+import './commands/utils/product-details'
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')

@@ -13,61 +13,35 @@ describe('Purchase Flow', () => {
     });
 
     it('open & close sidecart', () => {
-        cy.get(Cypress.env('openSidecart'))
-            .as('openSidecart').click({ force: true });
-
-        cy.get(Cypress.env('isOpenSidecart'))
-            .as('isOpenSidecart')
-            .should('be.visible')
-            .then(($isOpenSidecart) => {
-                if ($isOpenSidecart.is(':visible')) {
-                    cy.get(Cypress.env('closeSidecart'))
-                        .as('closeSidecart')
-                        .click({ force: true });
-                } else {
-                    throw new Error('The sidecart is not open');
-                }
-            });
+        cy.openCloseSidecart();
     });
 
-    context('Add Products', () => {
-        it('Product Page', () => {
-            const addProduct = () => {
-                cy.visit(Cypress.env('collectionUrl'))
-                    .as('collection page');
+    it('Swiper button next and prev', () => {
+        cy.onlyOpenSidecart();
+        cy.swiperButtonNextUpsellSidecart();
+        cy.swiperButtonPrevUpsellSidecart();
+    });
 
-                cy.get(Cypress.env('productCard'))
-                    .as('product card')
-                    .then(($productCards) => {
-                        const randomIndex = Math.floor(Math.random() * $productCards.length);
-                        const randomCard = $productCards[randomIndex]
-                        cy.wrap(randomCard).click();
-                    });
+    context('Add products', () => {
 
-                cy.get(Cypress.env('productArea'))
-                    .as('product area')
-                    .find(Cypress.env('addProduct'))
-                    .as('add product')
-                    .then(($addToCart) => {
-                        if (!$addToCart.prop('disabled')) {
-                            $addToCart.click();
-                            cy.wait(2000)
-                        } else {
-                            addProduct();
-                        }
-                    });
-
-
-                cy.get(Cypress.env('errorStock'))
-                    .then(($errorStock) => {
-                        if ($errorStock.is(':visible')) {
-                            addProduct();
-                        }
-                    })
-            }
-            addProduct();
+        it('Product page', () => {
+            cy.addProductPage();
         });
-        //it
+
+        it('Collections page', () => {
+            cy.addProductCollection();
+        });
+
+        it('Upsell', () => {
+            cy.onlyOpenSidecart();
+            cy.addProductUpsellSidecart();
+        })
+
+        it.only('Verify items', () => {
+            cy.addProductPage();
+            cy.productDetails();
+        });
+
     });
 
 });
